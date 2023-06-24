@@ -1,12 +1,11 @@
 import React from "react";
-import "./header.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGreaterThan } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   return (
-    <nav class="header navbar bg-theme">
-      <div class=" container-fluid">
+    <nav className="header navbar bg-theme">
+      <div className=" container-fluid">
         <div className="navbar-brand fw-bold fs-4">AIO Summarizer</div>
         <div className="menu-items d-flex">
           <div className="fw-bold">Home</div>
