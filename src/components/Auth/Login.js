@@ -3,6 +3,10 @@ import anime from 'animejs';
 
 const Login = () => {
   const [animation, setAnimation] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorText, setErrorText] = useState('');
+  const [showError, setShowError] = useState(false);
 
   const handleFocus = (offsetValue, arrayValue) => {
     if (animation) animation.pause();
@@ -21,6 +25,34 @@ const Login = () => {
         },
       })
     );
+  };
+
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    if (email === '' && password === '') {
+      setErrorText('Please fill all the fields! ');
+      setShowError(true);
+    } else if (!email.includes('@')) {
+      setErrorText("Invalid Email! Please add '@' ");
+      setShowError(true);
+    } else if (password.length < 4) {
+      setErrorText('Password is too short!');
+      setShowError(true);
+    } else {
+      console.log('Sending request...');
+      setShowError(false);
+      setErrorText('');
+    }
+  };
+
+  const emailHandler = (e) => {
+    const userEmail = e.target.value;
+    setEmail(userEmail);
+  };
+
+  const passwordHandler = (e) => {
+    const userPassword = e.target.value;
+    setPassword(userPassword);
   };
 
   return (
@@ -49,13 +81,19 @@ const Login = () => {
             </defs>
             <path d="m 40,120.00016 239.99984,-3.2e-4 c 0,0 24.99263,0.79932 25.00016,35.00016 0.008,34.20084 -25.00016,35 -25.00016,35 h -239.99984 c 0,-0.0205 -25,4.01348 -25,38.5 0,34.48652 25,38.5 25,38.5 h 215 c 0,0 20,-0.99604 20,-25 0,-24.00396 -20,-25 -20,-25 h -190 c 0,0 -20,1.71033 -20,25 0,24.00396 20,25 20,25 h 168.57143" />
           </svg>
-          <div className="form">
+          <form className="form" onSubmit={formSubmitHandler}>
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" onFocus={() => handleFocus(0, '240 1386')} />
+            <input type="email" id="email" onFocus={() => handleFocus(0, '240 1386')} onChange={emailHandler} />
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" onFocus={() => handleFocus(-336, '240 1386')} />
+            <input
+              type="password"
+              id="password"
+              onFocus={() => handleFocus(-336, '240 1386')}
+              onChange={passwordHandler}
+            />
+            <p className="m-t-5 m-b-5 .text-danger">{showError && errorText}</p>
             <input type="submit" id="submit" value="Submit" onFocus={() => handleFocus(-730, '530 1386')} />
-          </div>
+          </form>
         </div>
       </div>
     </div>
