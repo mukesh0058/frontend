@@ -1,3 +1,22 @@
-.home-container{
-    margin-top: 20px;
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+}
+.action--container {
+  width: 80%;
+  margin: 20px 0px;
+}
+.container {
+  width: 80%;
+}
+.transcript-container {
+  width: 70%;
+  margin: 10px;
+}
+.summarization-container {
+  width: 30%;
+  margin: 10px;
 }
