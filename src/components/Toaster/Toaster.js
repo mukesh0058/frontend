@@ -7,6 +7,7 @@ const Toaster = ({ data }) => {
 
   useEffect(() => {
     setShowToast(!show);
+    setTimeout(() => setShowToast(false), 3000);
   }, [data]);
 
   return (
