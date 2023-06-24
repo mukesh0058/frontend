@@ -1,6 +1,6 @@
-import React from "react";
-import "./sidebar.scss";
-import SideBar from "./SideBar";
+import React from 'react';
+import './sidebar.scss';
+import SideBar from './SideBar';
 const Layout = () => {
   return (
     <div className="layout">

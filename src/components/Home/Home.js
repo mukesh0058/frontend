@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import TranscriptionComponent from "../TranscriptionComponent";
-import Toaster from "../Toaster/Toaster";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRepeat } from "@fortawesome/free-solid-svg-icons";
-import image from "../../img/Summaries.png";
+import React, { useState } from 'react';
+import TranscriptionComponent from '../TranscriptionComponent';
+import Toaster from '../Toaster/Toaster';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRepeat } from '@fortawesome/free-solid-svg-icons';
+import image from '../../img/Summaries.png';
 
 const Home = () => {
   const [toastData, setToastData] = useState(null);
@@ -21,21 +21,16 @@ const Home = () => {
     <>
       <div className="intro w-100 d-flex flex-col justify-content-center align-items-center mb-3">
         <div className=" w-50">
-          <h1 className="text-white text-center display-6 font-s-60">
-            Introducing AIO:
-          </h1>
+          <h1 className="text-white text-center display-6 font-s-60">Introducing AIO:</h1>
           <h1 className="text-white text-center font-s-60 font-w-700">
             <span>Automated Meeting</span>
           </h1>
           <div className="w-100 d-flex justify-content-center ">
-            <h1 className="text-white text-center font-s-60 font-w-700">
-              Summary
-            </h1>
+            <h1 className="text-white text-center font-s-60 font-w-700">Summary</h1>
           </div>
           <div>
             <h4 className="text-white text-center  mt-4">
-              Use the power of AI to save time and catch up on meetings in
-              seconds.
+              Use the power of AI to save time and catch up on meetings in seconds.
             </h4>
           </div>
         </div>
@@ -64,11 +59,8 @@ const Home = () => {
                 </div>
                 <p
                   dangerouslySetInnerHTML={{
-                    __html:
-                      fileData?.summary?.replaceAll(".", ".<br />") ||
-                      "No data found!",
-                  }}
-                ></p>
+                    __html: fileData?.summary?.replaceAll('.', '.<br />') || 'No data found!',
+                  }}></p>
               </div>
               <div className="quiz-container">
                 <div className="title fw-bold">
@@ -87,26 +79,21 @@ const Home = () => {
                       data-bs-toggle="collapse"
                       data-bs-target="#panelsStayOpen-collapseThree"
                       aria-expanded="false"
-                      aria-controls="panelsStayOpen-collapseThree"
-                    >
+                      aria-controls="panelsStayOpen-collapseThree">
                       Quiz
                     </button>
                   </h2>
                   <div
                     id="panelsStayOpen-collapseThree"
                     class="accordion-collapse collapse"
-                    aria-labelledby="panelsStayOpen-headingThree"
-                  >
+                    aria-labelledby="panelsStayOpen-headingThree">
                     <div class="accordion-body">
-                      <strong>This is the third item's accordion body.</strong>{" "}
-                      It is hidden by default, until the collapse plugin adds
-                      the appropriate classes that we use to style each element.
-                      These classes control the overall appearance, as well as
-                      the showing and hiding via CSS transitions. You can modify
-                      any of this with custom CSS or overriding our default
-                      variables. It's also worth noting that just about any HTML
-                      can go within the <code>.accordion-body</code>, though the
-                      transition does limit overflow.
+                      <strong>This is the third item's accordion body.</strong> It is hidden by default, until the
+                      collapse plugin adds the appropriate classes that we use to style each element. These classes
+                      control the overall appearance, as well as the showing and hiding via CSS transitions. You can
+                      modify any of this with custom CSS or overriding our default variables. It's also worth noting
+                      that just about any HTML can go within the <code>.accordion-body</code>, though the transition
+                      does limit overflow.
                     </div>
                   </div>
                 </div>
