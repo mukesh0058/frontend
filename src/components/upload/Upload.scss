@@ -1,0 +1,38 @@
+.link-add-upload {
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  padding: 80px 0;
+
+  .link-add {
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 0 1px #d6dce7;
+    border-radius: 8px;
+    padding: 16px 24px;
+    cursor: pointer;
+    transition: box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    margin: 5px 0;
+    .left {
+      padding: 0 10px 0 0;
+    }
+    .right {
+      padding: 0 10px;
+      width: 100%;
+      p {
+        font-size: large;
+        padding-left: 10px;
+      }
+      input {
+        padding-left: 10px;
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid grey;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+}

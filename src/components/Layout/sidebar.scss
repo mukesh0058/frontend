@@ -1,0 +1,30 @@
+.layout {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+.sideBar {
+  flex: 1;
+  max-width: 20%;
+  background-color: rgb(51, 66, 96);
+  .sidebar-header {
+    padding: 20px 20px 20px 25px;
+    width: 100%;
+    height: 100px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #fff;
+  }
+}
+.main {
+  flex: 4;
+  max-width: 80%;
+  background-color: aqua;
+  .main-header {
+    width: 100%;
+    min-height: 100px;
+    background-color: azure;
+  }
+}
