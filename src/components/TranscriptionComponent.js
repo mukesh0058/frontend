@@ -7,7 +7,8 @@ import {
   generateTranscript,
   uploadAudioFileToAssemblyAi,
 } from "./Api/assemblyai.action";
-import { faYoutube } from "@fortawesome/free-brands-svg-icons";
+import Mask from "../img/Maskgroup.png";
+import MasKYouTube from "../img/youtube-Icon.png";
 
 const TranscriptionComponent = ({
   setToastData,
@@ -82,7 +83,7 @@ const TranscriptionComponent = ({
   };
 
   return (
-    <div className="d-flex align-items-center justify-content-center">
+    <div className="d-flex  flex-column align-items-center justify-content-center gap-4">
       <input
         type="file"
         accept="audio/*"
@@ -91,20 +92,15 @@ const TranscriptionComponent = ({
         hidden
       />
       <div
-        className="d-flex me-3 align-items-center border upload-container"
+        className="d-flex align-items-center border w-600  upload-container"
         onClick={uploadController}
       >
         {isProcessing ? (
           <FontAwesomeIcon icon={faSpinner} spin />
         ) : (
           <>
-            <div className="me-4">
-              <FontAwesomeIcon
-                icon={faCloudUpload}
-                color="#000000"
-                size="2x"
-                fill="#000000"
-              />
+            <div className="me-5">
+              <img src={Mask} />
             </div>
             <div className="d-flex flex-column">
               <p className="upload-heading">Upload your file</p>
@@ -115,20 +111,35 @@ const TranscriptionComponent = ({
           </>
         )}
       </div>
-      <div className="d-flex align-items-center border upload-container">
+      <div
+        className="d-flex align-items-center border w-600  upload-container"
+        onClick={uploadController}
+      >
+        {isProcessing ? (
+          <FontAwesomeIcon icon={faSpinner} spin />
+        ) : (
+          <>
+            <div className="me-5">
+              <img src={Mask} />
+            </div>
+            <div className="d-flex flex-column">
+              <p className="upload-heading">Upload your audio file</p>
+              <span className="upload-text">
+                Drop your audio or video file here, or click to browse
+              </span>
+            </div>
+          </>
+        )}
+      </div>
+      <div className="d-flex align-items-center border upload-container w-600  w-25">
         {isProcessing ? (
           <FontAwesomeIcon icon={faSpinner} spin />
         ) : (
           <>
             <div className="me-4">
-              <FontAwesomeIcon
-                icon={faYoutube}
-                color="#000000"
-                size="2x"
-                fill="#000000"
-              />
+              <img src={MasKYouTube} />
             </div>
-            <div className="d-flex flex-column">
+            <div className="d-flex flex-column w-100 input-link">
               <p className="upload-heading">YouTube video link</p>
               <input
                 type="text"

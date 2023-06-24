@@ -3,6 +3,7 @@ import TranscriptionComponent from "../TranscriptionComponent";
 import Toaster from "../Toaster/Toaster";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRepeat } from "@fortawesome/free-solid-svg-icons";
+import image from "../../img/Summaries.png";
 
 const Home = () => {
   const [toastData, setToastData] = useState(null);
@@ -18,6 +19,31 @@ const Home = () => {
 
   return (
     <>
+      <div className="intro w-100 d-flex flex-col justify-content-center align-items-center mb-5">
+        <div className=" w-50">
+          <h1 className="text-white text-center display-6  font-s-60">
+            Introducing AIO:
+          </h1>
+          <h1 className="text-white text-center font-s-60 font-w-700">
+            <span>Automated Meeting</span>
+          </h1>
+          <div className="w-100 d-flex justify-content-center ">
+            <h1 className="text-white text-center font-s-60 font-w-700">
+              Summary
+            </h1>
+          </div>
+          <div>
+            <h4 className="text-white text-center  mt-4">
+              Use the power of AI to save time and catch up on meetings in
+              seconds.
+            </h4>
+          </div>
+          <div className="d-flex justify-content-center mt-5">
+            <button className="btn-custom ">Get Started Free</button>
+          </div>
+        </div>
+      </div>
+
       {toastData && <Toaster data={toastData} />}
       <div className="main">
         <div className="action--container">
@@ -100,6 +126,7 @@ const Home = () => {
           </div>
         )}
       </div>
+      <div className=" bg-custom-purple"></div>
     </>
   );
 };
