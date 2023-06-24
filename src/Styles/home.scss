@@ -12,6 +12,20 @@
 .container {
   width: 80%;
 }
+.youtube-link-box {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  // border-bottom: 1px solid gray !important;
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid gray !important;
+  }
+  &:focus-visible {
+    outline: none;
+    border-bottom: 1px solid gray !important;
+  }
+}
 .transcript-container {
   width: 70%;
   margin: 10px;
@@ -121,7 +135,7 @@
 
 .intro {
   background-image: url(../img/bg-home.png);
-  min-height: 600px;
+  min-height: 400px;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;

@@ -7,7 +7,7 @@ body {
   font-family: "Montserrat", sans-serif !important;
 }
 .upload-container {
-  width: fit-content;
+  width: 638px !important;
   display: flex;
   align-items: center;
   box-shadow: 0 0 0 1px #a1a1a1;
@@ -23,19 +23,16 @@ body {
   .upload-heading {
     font-size: 16px;
     line-height: 160%;
-    // letter-spacing: 1%;
-
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 4px;
   }
   .upload-text {
+    font-weight: 500;
+    font-size: 16px;
     color: #a9a6a5;
   }
 }
 .h-600 {
   height: 600px !important;
 }
-
-
-

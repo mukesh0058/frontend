@@ -19,9 +19,9 @@ const Home = () => {
 
   return (
     <>
-      <div className="intro w-100 d-flex flex-col justify-content-center align-items-center mb-5">
+      <div className="intro w-100 d-flex flex-col justify-content-center align-items-center mb-3">
         <div className=" w-50">
-          <h1 className="text-white text-center display-6  font-s-60">
+          <h1 className="text-white text-center display-6 font-s-60">
             Introducing AIO:
           </h1>
           <h1 className="text-white text-center font-s-60 font-w-700">
@@ -37,9 +37,6 @@ const Home = () => {
               Use the power of AI to save time and catch up on meetings in
               seconds.
             </h4>
-          </div>
-          <div className="d-flex justify-content-center mt-5">
-            <button className="btn-custom ">Get Started Free</button>
           </div>
         </div>
       </div>
@@ -126,7 +123,6 @@ const Home = () => {
           </div>
         )}
       </div>
-      <div className=" bg-custom-purple"></div>
     </>
   );
 };

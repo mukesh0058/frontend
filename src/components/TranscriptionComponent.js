@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCloudUpload, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { generateQuizFromOpenAi } from "./Api/quiz.action";
 import {
   checkStatusOfTranscript,
@@ -8,6 +8,7 @@ import {
   uploadAudioFileToAssemblyAi,
 } from "./Api/assemblyai.action";
 import Mask from "../img/Maskgroup.png";
+import videoUpload from "../img/videoUpload.png";
 import MasKYouTube from "../img/youtube-Icon.png";
 import { videoToAudio } from "./Api/action";
 
@@ -112,13 +113,13 @@ const TranscriptionComponent = ({
           <FontAwesomeIcon icon={faSpinner} spin />
         ) : (
           <>
-            <div className="me-5">
-              <img src={Mask} />
+            <div className="me-4">
+              <img src={Mask} alt="" />
             </div>
             <div className="d-flex flex-column">
-              <p className="upload-heading">Upload your file</p>
+              <p className="upload-heading">Upload Audio File</p>
               <span className="upload-text">
-                Drop your audio or video file here, or click to browse
+                Drop your audio file here, or click to browse
               </span>
             </div>
           </>
@@ -128,21 +129,17 @@ const TranscriptionComponent = ({
         className="d-flex align-items-center border w-600  upload-container"
         onClick={uploadController}
       >
-        {isProcessing ? (
-          <FontAwesomeIcon icon={faSpinner} spin />
-        ) : (
-          <>
-            <div className="me-5">
-              <img src={Mask} />
-            </div>
-            <div className="d-flex flex-column">
-              <p className="upload-heading">Upload your audio file</p>
-              <span className="upload-text">
-                Drop your audio or video file here, or click to browse
-              </span>
-            </div>
-          </>
-        )}
+        <>
+          <div className="me-4">
+            <img src={videoUpload} alt="" />
+          </div>
+          <div className="d-flex flex-column">
+            <p className="upload-heading">Upload Video File</p>
+            <span className="upload-text">
+              Drop your video file here, or click to browse
+            </span>
+          </div>
+        </>
       </div>
       <div className="d-flex align-items-center border upload-container w-600  w-25">
         {isProcessing ? (
@@ -150,10 +147,10 @@ const TranscriptionComponent = ({
         ) : (
           <>
             <div className="me-4">
-              <img src={MasKYouTube} />
+              <img src={MasKYouTube} alt="" />
             </div>
             <div className="d-flex flex-column w-100 input-link">
-              <p className="upload-heading">YouTube video link</p>
+              <p className="upload-heading">YouTube Video Link</p>
               <input
                 type="text"
                 className="youtube-link-box"
