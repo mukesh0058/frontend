@@ -9,6 +9,7 @@ import {
 } from "./Api/assemblyai.action";
 import Mask from "../img/Maskgroup.png";
 import MasKYouTube from "../img/youtube-Icon.png";
+import { videoToAudio } from "./Api/action";
 
 const TranscriptionComponent = ({
   setToastData,
@@ -27,8 +28,20 @@ const TranscriptionComponent = ({
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("file", file);
-    await uploadFile(formData);
+    await uploadFileToServer(formData);
     setIsProcessing(false);
+  };
+
+  const uploadFileToServer = async (uploadFileToServer) => {
+    await videoToAudio(uploadFileToServer)
+      .then(async (response) => {
+        console.log("response", response);
+        await doUploadVideo(response.data);
+        handleQuizResponse(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const uploadFile = async (fileData) => {
