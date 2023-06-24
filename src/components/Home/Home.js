@@ -29,7 +29,7 @@ const Home = () => {
           </h1>
           <div className="w-100 d-flex justify-content-center ">
             <h1 className="text-white text-center font-s-60 font-w-700">
-              Summary
+              Summarization
             </h1>
           </div>
           <div>

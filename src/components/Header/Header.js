@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "./Header.scss";
 
 const Header = () => {
+  const [scroll, setActive] = useState(false);
+
+  const isActive = () => {
+    window.scrollY > 0 ? setActive(true) : setActive(false);
+  };
+
+  useEffect(() => {
+    console.log(window.scrollY + " scrolling");
+    window.addEventListener("scroll", isActive);
+    return () => {
+      window.removeEventListener("scroll", isActive);
+    };
+  }, []);
+
   return (
     <>
-      <nav className="navbar fixed-top navbar-dark navbar-expand-lg navbar-light bg-none">
+      <nav
+        className={`navbar fixed-top  navbar-expand-lg navbar-light ${
+          scroll ? "bg-light" : "bg-none navbar-dark"
+        }`}
+      >
         <div className="container-fluid px-5">
           <a className="navbar-brand" href="#">
             <div className="navbar-brand fw-bold fs-4">AIO Summarizer</div>

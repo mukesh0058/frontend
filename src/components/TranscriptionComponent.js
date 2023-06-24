@@ -113,8 +113,8 @@ const TranscriptionComponent = ({
           <FontAwesomeIcon icon={faSpinner} spin />
         ) : (
           <>
-            <div className="me-4">
-              <img src={Mask} alt="" />
+            <div className="me-5">
+              <img src={Mask} className="upload-icon" />
             </div>
             <div className="d-flex flex-column">
               <p className="upload-heading">Upload Audio File</p>
@@ -131,7 +131,7 @@ const TranscriptionComponent = ({
       >
         <>
           <div className="me-4">
-            <img src={videoUpload} alt="" />
+            <img src={videoUpload} alt="" className="upload-icon" />
           </div>
           <div className="d-flex flex-column">
             <p className="upload-heading">Upload Video File</p>
@@ -147,7 +147,7 @@ const TranscriptionComponent = ({
         ) : (
           <>
             <div className="me-4">
-              <img src={MasKYouTube} alt="" />
+              <img src={MasKYouTube} alt="" className="upload-icon" />
             </div>
             <div className="d-flex flex-column w-100 input-link">
               <p className="upload-heading">YouTube Video Link</p>

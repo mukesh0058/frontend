@@ -10,7 +10,7 @@ import UploadPage from "./components/Home/UploadPage";
 const App = () => {
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
