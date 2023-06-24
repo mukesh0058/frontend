@@ -1,0 +1,16 @@
+.header {
+  .container-fluid {
+    align-self: center !important;
+    width: 95%;
+    max-width: 1200px;
+    .menu-items {
+      font-size: 14px !important;
+      div {
+        cursor: pointer;
+      }
+      div:not(:last-child) {
+        margin-right: 20px;
+      }
+    }
+  }
+}
