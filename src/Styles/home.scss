@@ -15,8 +15,15 @@
 .transcript-container {
   width: 70%;
   margin: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 .summarization-container {
   width: 30%;
   margin: 10px;
+}
+.accordion-button:focus {
+  box-shadow: none;
+}
+.accordion-button:not(.collapsed) {
+  background-color: #f4f8fb;
 }
