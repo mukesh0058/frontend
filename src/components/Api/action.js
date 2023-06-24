@@ -1,5 +1,4 @@
 import axios from "axios";
-const ASSEMBLYAI_KEY = "9f7b586e30eb474184416954ef8c47c0";
 
 export const videoToAudio = async (data) => {
   return await axios.post(
@@ -7,9 +6,15 @@ export const videoToAudio = async (data) => {
     data,
     {
       headers: {
-        Authorization: ASSEMBLYAI_KEY,
         "Content-Type": "multipart/form-data",
       },
     }
+  );
+};
+
+export const videoToAudioYoutube = async (url) => {
+  return await axios.post(
+    `http://122.179.158.94:3304/user/youtube/video-to-audio`,
+    { url }
   );
 };

@@ -13,6 +13,7 @@
   width: 80%;
 }
 .youtube-link-box {
+  width: 90%;
   border-top: none;
   border-left: none;
   border-right: none;
@@ -172,7 +173,7 @@
   border-top: none;
   border-left: none;
   border-right: none;
-  border-bottom: 1px solid gray !important;
+  border-bottom: none !important;
   &:focus {
     outline: none;
     border-bottom: 1px solid gray !important;

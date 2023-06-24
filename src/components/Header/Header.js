@@ -25,9 +25,7 @@ const Header = () => {
         }`}
       >
         <div className="container-fluid px-5">
-          <a className="navbar-brand" href="#">
-            <div className="navbar-brand fw-bold fs-4">AIO Summarizer</div>
-          </a>
+          <div className="navbar-brand fw-bold fs-4">AIO Summarizer</div>
           <button
             className="navbar-toggler"
             type="button"
@@ -45,12 +43,12 @@ const Header = () => {
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
                   <a className="nav-link active" aria-current="page" href="#">
-                    menu 1
+                    About
                   </a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#">
-                    menu 2
+                    Contact
                   </a>
                 </li>
                 <li className="nav-item">

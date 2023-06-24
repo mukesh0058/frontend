@@ -25,7 +25,9 @@
   justify-content: flex-start;
   text-align: center;
   color: #01053a;
-  cursor: pointer;
+  svg {
+    cursor: pointer;
+  }
 }
 .summarization-box {
   position: relative;
@@ -40,7 +42,7 @@
 }
 .summarization-data {
   max-height: 240px;
-  overflow: auto;
+  overflow: hidden;
   padding-right: 15px;
   font-family: Montserrat !important;
   font-size: 16px;
@@ -50,6 +52,11 @@
   text-align: left;
   color: #6f6f6f;
 }
+.summarization-data:hover,
+.quiz-data:hover,
+.transcription-data:hover {
+  overflow-y: scroll;
+}
 
 .title-summarization {
   position: sticky;
@@ -58,7 +65,7 @@
   display: flex;
   justify-content: space-between;
   top: 0px;
-  padding: 20px 0px;
+  padding: 25px 0px;
   left: 30px;
   right: 30px;
   font-family: Montserrat !important;
@@ -70,14 +77,14 @@
   color: #01053a;
   span {
     span {
-      padding: 0 10px;
+      padding: 0 20px;
     }
   }
 }
 .quiz-box {
   position: relative;
   width: 100%;
-  max-height: 333px;
+  max-height: 530px;
   border-radius: 31px;
   border: 1px solid #a1a1a1;
   padding: 0px 15px 15px 30px;
@@ -86,7 +93,7 @@
 }
 .quiz-data {
   max-height: 240px;
-  overflow: auto;
+  overflow: hidden;
   padding-right: 15px;
   font-family: Montserrat !important;
   font-size: 16px;
@@ -110,7 +117,7 @@
 }
 .transcription-data {
   max-height: 610px;
-  overflow: auto;
+  overflow: hidden;
   padding-right: 15px;
   font-family: Montserrat !important;
   font-size: 16px;

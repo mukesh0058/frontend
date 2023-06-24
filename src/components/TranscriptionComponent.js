@@ -1,6 +1,4 @@
 import React, { useRef, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { generateQuizFromOpenAi } from "./Api/quiz.action";
 import {
   checkStatusOfTranscript,
@@ -10,18 +8,24 @@ import {
 import Mask from "../img/Maskgroup.png";
 import videoUpload from "../img/videoUpload.png";
 import MasKYouTube from "../img/youtube-Icon.png";
-import { videoToAudio } from "./Api/action";
+import { videoToAudio, videoToAudioYoutube } from "./Api/action";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGreaterThan } from "@fortawesome/free-solid-svg-icons";
 
 const TranscriptionComponent = ({
-  setToastData,
   handleTranscriptionResponse,
   handleQuizResponse,
 }) => {
   const [isProcessing, setIsProcessing] = useState(false);
-  const uploadFileRef = useRef();
+  const [youtubeLink, setYoutubeLink] = useState("");
+  const uploadAudioFileRef = useRef();
+  const uploadVideoFileRef = useRef();
 
-  const uploadController = () => {
-    uploadFileRef.current.click();
+  const audioUploadController = () => {
+    uploadAudioFileRef.current.click();
+  };
+  const videoUploadController = () => {
+    uploadVideoFileRef.current.click();
   };
 
   const handleVideoUpload = async (e) => {
@@ -33,12 +37,31 @@ const TranscriptionComponent = ({
     setIsProcessing(false);
   };
 
+  const handleYoutubeLink = async () => {
+    if (youtubeLink) {
+      setIsProcessing(true);
+      await videoToAudioYoutube(youtubeLink)
+        .then(async (response) => {
+          await doUploadVideo(response.data);
+        })
+        .catch((error) => console.log(error));
+      setIsProcessing(false);
+    }
+  };
+
+  const handleAudioUpload = async (e) => {
+    setIsProcessing(true);
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+    await uploadFile(formData);
+    setIsProcessing(false);
+  };
+
   const uploadFileToServer = async (uploadFileToServer) => {
     await videoToAudio(uploadFileToServer)
       .then(async (response) => {
-        console.log("response", response);
         await doUploadVideo(response.data);
-        handleQuizResponse(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -68,17 +91,9 @@ const TranscriptionComponent = ({
       .then(async (pollingResponse) => {
         const transcriptionResult = pollingResponse.data;
         if (transcriptionResult.status === "completed") {
-          setToastData({
-            type: "Success",
-            message: `Transcription Generated.`,
-          });
           handleTranscriptionResponse(transcriptionResult);
           await generateQuiz(transcriptionResult.text);
         } else if (transcriptionResult.status === "error") {
-          setToastData({
-            type: "Error",
-            message: `Transcription failed: ${transcriptionResult.error}`,
-          });
         } else {
           setTimeout(async () => await checkStatus(id), 3000);
         }
@@ -97,21 +112,26 @@ const TranscriptionComponent = ({
   };
 
   return (
-    <div className="d-flex  flex-column align-items-center justify-content-center gap-4">
-      <input
-        type="file"
-        accept="audio/*"
-        ref={uploadFileRef}
-        onChange={handleVideoUpload}
-        hidden
-      />
-      <div
-        className="d-flex align-items-center border w-600  upload-container"
-        onClick={uploadController}
-      >
-        {isProcessing ? (
-          <FontAwesomeIcon icon={faSpinner} spin />
-        ) : (
+    <>
+      <div className="d-flex  flex-column align-items-center justify-content-center gap-4">
+        <input
+          type="file"
+          accept="audio/*"
+          ref={uploadAudioFileRef}
+          onChange={handleAudioUpload}
+          hidden
+        />
+        <input
+          type="file"
+          accept="video/*"
+          ref={uploadVideoFileRef}
+          onChange={handleVideoUpload}
+          hidden
+        />
+        <div
+          className="d-flex align-items-center border w-600  upload-container"
+          onClick={audioUploadController}
+        >
           <>
             <div className="me-5">
               <img src={Mask} className="upload-icon" />
@@ -123,51 +143,50 @@ const TranscriptionComponent = ({
               </span>
             </div>
           </>
-        )}
-      </div>
-      <div
-        className="d-flex align-items-center border w-600  upload-container"
-        onClick={uploadController}
-      >
-        <>
-          <div className="me-4">
-            <img src={videoUpload} alt="" className="upload-icon" />
-          </div>
-          <div className="d-flex flex-column">
-            <p className="upload-heading">Upload Video File</p>
-            <span className="upload-text">
-              Drop your video file here, or click to browse
-            </span>
-          </div>
-        </>
-      </div>
-      <div className="d-flex align-items-center border upload-container w-600  w-25">
-        {isProcessing ? (
-          <FontAwesomeIcon icon={faSpinner} spin />
-        ) : (
+        </div>
+        <div
+          className="d-flex align-items-center border w-600  upload-container"
+          onClick={videoUploadController}
+        >
+          <>
+            <div className="me-4">
+              <img src={videoUpload} alt="" className="upload-icon" />
+            </div>
+            <div className="d-flex flex-column">
+              <p className="upload-heading">Upload Video File</p>
+              <span className="upload-text">
+                Drop your video file here, or click to browse
+              </span>
+            </div>
+          </>
+        </div>
+        <div className="d-flex align-items-center border upload-container w-600  w-25">
           <>
             <div className="me-4">
               <img src={MasKYouTube} alt="" className="upload-icon" />
             </div>
             <div className="d-flex flex-column w-100 input-link">
               <p className="upload-heading">YouTube Video Link</p>
-              <input
-                type="text"
-                className="youtube-link-box"
-                placeholder="https://www.youtube.com/watch?v=jd..."
-              />
+              <div className="">
+                <input
+                  type="text"
+                  className="youtube-link-box"
+                  value={youtubeLink}
+                  onChange={(e) => setYoutubeLink(e.target.value)}
+                  placeholder="https://www.youtube.com/watch?v=jd..."
+                />
+                <button
+                  className="btn btn-outline-dark"
+                  onClick={handleYoutubeLink}
+                >
+                  <FontAwesomeIcon icon={faGreaterThan} />
+                </button>
+              </div>
             </div>
           </>
-        )}
+        </div>
       </div>
-      {/* <button
-        disabled={isProcessing}
-        className="btn btn-primary mt-3"
-        onClick={() => doUploadVideo()}
-      >
-        {isProcessing ? <FontAwesomeIcon icon={faSpinner} spin /> : "Next"}
-      </button> */}
-    </div>
+    </>
   );
 };
 
