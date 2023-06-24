@@ -1,0 +1,92 @@
+.main-component {
+    max-width: 100rem;
+    margin: 30px auto;
+    padding: 20px;
+}
+.fs-smallerthan{
+    font-size: 32px;
+}
+
+.main-component-heading{
+    display: flex;
+    align-items: center;
+}
+
+.back-button:hover{
+cursor: pointer;
+}
+
+.meeting-status-heading{
+    font-size: 32px;
+    font-family: sans-serif;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: 0em;
+    color: #01053A;
+
+}
+
+.meets-container{
+    max-width: 100%;
+    min-height: 80px;
+    display: flex;
+    gap: 5px;
+    border: 1px solid #A1A1A1;
+    padding: 15px 12px;
+    border-radius: 24px;
+    margin: 40px auto;
+    flex-wrap: wrap;
+}
+
+.meet-heading{
+    color: rgb(17, 29, 46);
+    font-weight: 600;
+    text-transform: capitalize;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden !important;
+}
+
+.meet-heading-container{
+    margin-bottom: 10px;
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.meet-details-container{
+    display: flex;
+}
+
+
+.meets-subcontainer{
+    width: 100%;
+    padding: 10px;
+}
+
+// .meet-heading-container h6 span{
+//     background-color: ;
+// }
+
+.success-badge{
+background: rgba(6, 158, 12, 0.21);
+padding: 6px 10px;
+border-radius: 20px;
+margin-right: 20px;
+
+}
+
+.warning-badge{
+background: rgba(228, 147, 26, 0.21);
+padding: 6px 10px;
+border-radius: 20px;
+margin-right: 20px;
+}
+
+.danger-badge{
+background:rgba(255, 0, 0, 0.21);
+padding: 6px 10px;
+border-radius: 20px;
+margin-right: 20px;
+}
