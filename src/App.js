@@ -11,7 +11,7 @@ import MeetingStatus from './components/Home/MeetingStatus';
 const App = () => {
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />

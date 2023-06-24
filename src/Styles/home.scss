@@ -164,26 +164,38 @@
   width: 600px !important;
 }
 
-.input-link {
-  input {
-    border: none;
-    &:focus {
-      border: none !important;
-    }
-  }
-}
-
 .bg-custom-purple {
   background-color: #69069e;
   height: 10px;
+}
+.youtube-link-box {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid gray !important;
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid gray !important;
+  }
+  &:focus-visible {
+    outline: none;
+    border-bottom: 1px solid gray !important;
+  }
 }
 
 @media only screen and (max-width: 600px) {
   .font-s-60 {
     font-size: 30px;
   }
+  .w-50 {
+    width: 100% !important;
+  }
   .w-600 {
     width: 300px !important;
+  }
+  .intro {
+    padding-top: 0px;
+    height: 700px;
   }
   .btn-custom {
     border-radius: 32px;
@@ -192,5 +204,11 @@
     font-weight: bold;
     height: 84px;
     padding: 20px 36px 20px 36px;
+  }
+  .youtube-link-box {
+    width: 100%;
+  }
+  .upload-icon {
+    width: 50px;
   }
 }

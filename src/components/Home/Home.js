@@ -26,7 +26,7 @@ const Home = () => {
             <span>Automated Meeting</span>
           </h1>
           <div className="w-100 d-flex justify-content-center ">
-            <h1 className="text-white text-center font-s-60 font-w-700">Summary</h1>
+            <h1 className="text-white text-center font-s-60 font-w-700">Summarization</h1>
           </div>
           <div>
             <h4 className="text-white text-center  mt-4">
