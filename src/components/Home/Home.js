@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import TranscriptionComponent from "../TranscriptionComponent";
 import Toaster from "../Toaster/Toaster";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRepeat } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
   const [toastData, setToastData] = useState(null);
   const [fileData, setFileData] = useState(null);
-  const handleTranscriptionComplete = (resp) => {
+
+  const handleTranscriptionResponse = (resp) => {
     setFileData(resp);
+  };
+
+  const handleQuizResponse = (resp) => {
+    console.log(resp);
   };
 
   return (
@@ -16,58 +23,38 @@ const Home = () => {
         <div className="action--container">
           <TranscriptionComponent
             setToastData={setToastData}
-            handleTranscriptionComplete={handleTranscriptionComplete}
+            handleTranscriptionResponse={handleTranscriptionResponse}
+            handleQuizResponse={handleQuizResponse}
           />
         </div>
         {fileData && (
-          <div className="container">
-            <div className="summarization-container">
-              <div class="accordion" id="accordionPanelsStayOpenExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                    <button
-                      class="accordion-button"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#panelsStayOpen-collapseOne"
-                      aria-expanded="true"
-                      aria-controls="panelsStayOpen-collapseOne"
-                    >
-                      Transcription
+          <div className="d-flex">
+            <div className="container flex-column">
+              <div className="summarization-container">
+                <div className="title fw-bold">
+                  <span>Summarization</span>
+                  {fileData?.summary && (
+                    <button className="regenerate-btn">
+                      <FontAwesomeIcon icon={faRepeat} />
                     </button>
-                  </h2>
-                  <div
-                    id="panelsStayOpen-collapseOne"
-                    class="accordion-collapse collapse show"
-                    aria-labelledby="panelsStayOpen-headingOne"
-                  >
-                    <div class="accordion-body">
-                      <strong>{fileData?.text || "No data found!"}</strong>
-                    </div>
-                  </div>
+                  )}
                 </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                    <button
-                      class="accordion-button collapsed"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#panelsStayOpen-collapseTwo"
-                      aria-expanded="false"
-                      aria-controls="panelsStayOpen-collapseTwo"
-                    >
-                      Summarization
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      fileData?.summary?.replaceAll(".", ".<br />") ||
+                      "No data found!",
+                  }}
+                ></p>
+              </div>
+              <div className="quiz-container">
+                <div className="title fw-bold">
+                  <span>Quiz</span>
+                  {fileData?.summary && (
+                    <button className="regenerate-btn">
+                      <FontAwesomeIcon icon={faRepeat} />
                     </button>
-                  </h2>
-                  <div
-                    id="panelsStayOpen-collapseTwo"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="panelsStayOpen-headingTwo"
-                  >
-                    <div class="accordion-body">
-                      {fileData?.summary || "No data found!"}
-                    </div>
-                  </div>
+                  )}
                 </div>
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="panelsStayOpen-headingThree">
@@ -101,6 +88,14 @@ const Home = () => {
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="transcript-container">
+              {fileData?.utterances?.map((speaker, key) => (
+                <div key={key}>
+                  <span className="fw-bold">{`Speaker ${speaker.speaker}: `}</span>
+                  <span>{speaker.text}</span>
+                </div>
+              ))}
             </div>
           </div>
         )}
