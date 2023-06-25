@@ -41,7 +41,6 @@ const TranscriptionComponent = ({
     const formData = new FormData();
     formData.append("file", file);
     await uploadFileToServer(formData);
-    setIsProcessing(false);
   };
 
   const handleYoutubeLink = async () => {
@@ -53,7 +52,6 @@ const TranscriptionComponent = ({
           await doUploadVideo(response.data);
         })
         .catch((error) => console.log(error));
-      setIsProcessing(false);
     }
   };
 
@@ -64,7 +62,6 @@ const TranscriptionComponent = ({
     const formData = new FormData();
     formData.append("file", file);
     await uploadFile(formData);
-    setIsProcessing(false);
   };
 
   const uploadFileToServer = async (uploadFileToServer) => {
@@ -114,9 +111,11 @@ const TranscriptionComponent = ({
     await generateQuizFromOpenAi(text)
       .then((response) => {
         handleQuizResponse(response);
+        setIsProcessing(false);
       })
       .catch((error) => {
         console.log(error);
+        setIsProcessing(false);
       });
   };
 

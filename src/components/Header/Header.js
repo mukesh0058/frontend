@@ -11,7 +11,6 @@ const Header = () => {
   };
 
   useEffect(() => {
-    console.log(window.scrollY + " scrolling");
     window.addEventListener("scroll", isActive);
     return () => {
       window.removeEventListener("scroll", isActive);

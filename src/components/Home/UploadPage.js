@@ -6,7 +6,18 @@ import Quiz from "../../SVG/Quiz";
 import SubTitle from "../../SVG/SubTitle";
 import Regenerate from "../../img/icon_regenerate.png";
 
-const UploadPage = ({ fileData, setFileData }) => {
+const UploadPage = ({ fileData, setFileData, quizData }) => {
+  const quizDisplay = (data) => {
+    const queAns = data?.text?.split("\nA:");
+    return (
+      <div className="mt-3">
+        <span className="fw-bold text-dark">Question:&nbsp;</span>
+        {queAns[0]} <br />
+        <span className="fw-bold text-dark">Answer:</span> {queAns[1] || queAns[2] || ""}
+      </div>
+    );
+  };
+
   return (
     <div>
       <NewHeader />
@@ -50,7 +61,7 @@ const UploadPage = ({ fileData, setFileData }) => {
                 </button>
               </div>
               <div className="quiz-data">
-                <p></p>
+                {quizData?.map((data) => quizDisplay(data))}
               </div>
             </div>
           </div>
