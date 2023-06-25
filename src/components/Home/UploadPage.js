@@ -5,6 +5,8 @@ import Writing from "../../SVG/Writing";
 import Quiz from "../../SVG/Quiz";
 import SubTitle from "../../SVG/SubTitle";
 import Regenerate from "../../img/icon_regenerate.png";
+import UserIcon from "../../SVG/UserIcon";
+import UserIcon1 from "../../SVG/userIcon1";
 
 const UploadPage = ({ fileData, setFileData, quizData }) => {
   const quizDisplay = (data) => {
@@ -73,14 +75,28 @@ const UploadPage = ({ fileData, setFileData, quizData }) => {
               </span>
             </div>
             <div className="transcription-data">
-              {fileData?.utterances?.map((data) => (
-                <p className="text-justify">
-                  <span className="fw-bold text-dark">
-                    Speaker {data?.speaker}:&nbsp;
-                  </span>
-                  <span>{data?.text}</span>
-                </p>
-              ))}
+              {fileData?.utterances?.map((data, i) => {
+                return (
+                  <>
+                    <div className="d-flex">
+                      <div className="d-flex  me-3">
+                        {i % 2 == 0 ? <UserIcon /> : <UserIcon1 />}
+                      </div>
+                      <div className="d-flex flex-column w-75  pt-2">
+                        <div>
+                          <span className="fw-bold text-dark d-block">
+                            Speaker
+                            {data?.speaker}:&nbsp;
+                          </span>
+                        </div>
+                        <p className="text-justify">
+                          <span className="d-block">{data?.text}</span>
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
             </div>
           </div>
         </div>
