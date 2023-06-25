@@ -18,3 +18,11 @@ export const videoToAudioYoutube = async (url) => {
     { url }
   );
 };
+
+export const uploadAudioFile = async (data) => {
+  return await axios.post("http://122.179.158.94:3304/user/audio", data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};

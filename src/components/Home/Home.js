@@ -8,8 +8,13 @@ import {
   generateTranscript,
   uploadAudioFileToAssemblyAi,
 } from "../Api/assemblyai.action";
-import { videoToAudio, videoToAudioYoutube } from "../Api/action";
+import {
+  uploadAudioFile,
+  videoToAudio,
+  videoToAudioYoutube,
+} from "../Api/action";
 
+let interval;
 const Home = () => {
   const [fileData, setFileData] = useState(null);
   const [file, setFile] = useState(null);
@@ -55,7 +60,18 @@ const Home = () => {
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("file", file);
-    await uploadFile(formData);
+    await uploadAudioFileToServer(formData);
+  };
+
+  const uploadAudioFileToServer = async (uploadFileToServer) => {
+    await uploadAudioFile(uploadFileToServer)
+      .then(async (response) => {
+        setFile(response?.data);
+        await doUploadVideo(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const uploadFileToServer = async (uploadFileToServer) => {
@@ -81,6 +97,10 @@ const Home = () => {
   const doUploadVideo = async (fileUrl) => {
     await generateTranscript(fileUrl)
       .then(async (response) => {
+        interval = setInterval(
+          async () => await checkStatus(response.data.id),
+          3000
+        );
         await checkStatus(response.data.id);
       })
       .catch((error) => {
@@ -93,14 +113,16 @@ const Home = () => {
       .then(async (pollingResponse) => {
         const transcriptionResult = pollingResponse.data;
         if (transcriptionResult.status === "completed") {
+          clearInterval(interval);
           handleTranscriptionResponse(transcriptionResult);
-          if ((setRegenerateProcess && loaderType === "quiz") || isProcessing) {
-            await generateQuiz(transcriptionResult.text);
-          }
+          // if ((regenerateProcess && loaderType === "quiz") || isProcessing) {
+          await generateQuiz(transcriptionResult.text);
+          // }
           setRegenerateProcess(false);
         } else if (transcriptionResult.status === "error") {
-        } else {
-          setTimeout(async () => await checkStatus(id), 3000);
+          clearInterval(interval);
+        } else if (transcriptionResult.status === "processing") {
+          console.log("Processing...");
         }
       })
       .catch((error) => console.log(error));
