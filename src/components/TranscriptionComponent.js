@@ -111,9 +111,9 @@ const TranscriptionComponent = ({
               {isProcessing && loaderType === "youtube" ? (
                 <p className="upload-heading">Processing Please Wait....</p>
               ) : (
-                <>
+                <div className="d-flex align-items-center">
+                  <div className="d-flex flex-column w-100">
                   <p className="upload-heading">YouTube Video Link</p>
-                  <div className="">
                     <input
                       type="text"
                       className="youtube-link-box"
@@ -122,14 +122,14 @@ const TranscriptionComponent = ({
                       onChange={(e) => setYoutubeLink(e.target.value)}
                       placeholder="https://www.youtube.com/watch?v=jd..."
                     />
-                    <button
-                      className="btn btn-outline-dark"
-                      onClick={handleYoutubeLink}
-                    >
-                      <FontAwesomeIcon icon={faGreaterThan} />
-                    </button>
                   </div>
-                </>
+                  <button
+                    className="btn btn-outline-dark"
+                    onClick={handleYoutubeLink}
+                  >
+                    <FontAwesomeIcon icon={faGreaterThan} />
+                  </button>
+                </div>
               )}
             </div>
           </>

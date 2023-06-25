@@ -94,7 +94,10 @@ const Home = () => {
         const transcriptionResult = pollingResponse.data;
         if (transcriptionResult.status === "completed") {
           handleTranscriptionResponse(transcriptionResult);
-          await generateQuiz(transcriptionResult.text);
+          if ((setRegenerateProcess && loaderType === "quiz") || isProcessing) {
+            await generateQuiz(transcriptionResult.text);
+          }
+          setRegenerateProcess(false);
         } else if (transcriptionResult.status === "error") {
         } else {
           setTimeout(async () => await checkStatus(id), 3000);
@@ -108,10 +111,12 @@ const Home = () => {
       .then((response) => {
         handleQuizResponse(response);
         setIsProcessing(false);
+        setRegenerateProcess(false);
       })
       .catch((error) => {
         console.log(error);
         setIsProcessing(false);
+        setRegenerateProcess(false);
       });
   };
 
@@ -123,7 +128,6 @@ const Home = () => {
     } else {
       await doUploadVideo(file);
     }
-    setRegenerateProcess(false);
   };
 
   return !fileData ? (
