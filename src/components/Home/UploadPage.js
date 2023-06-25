@@ -22,9 +22,9 @@ const UploadPage = ({
     const queAns = data?.text?.split("\nA:");
     return (
       <div className="mt-3">
-        <span className="fw-bold text-dark">Question:&nbsp;</span>
-        {queAns[0]} <br />
-        <span className="fw-bold text-dark">Answer:</span>{" "}
+        <span className="fw-bold text-dark">Que:&nbsp;</span>
+        <span className="fw-bold text-dark">{queAns[0]}</span> <br />
+        <span className="fw-bold text-dark">Ans:</span>{" "}
         {queAns[1] || queAns[2] || ""}
       </div>
     );
