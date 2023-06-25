@@ -5,17 +5,27 @@ import Writing from "../../SVG/Writing";
 import Quiz from "../../SVG/Quiz";
 import SubTitle from "../../SVG/SubTitle";
 import Regenerate from "../../img/icon_regenerate.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import UserIcon from "../../SVG/UserIcon";
 import UserIcon1 from "../../SVG/userIcon1";
 
-const UploadPage = ({ fileData, setFileData, quizData }) => {
+const UploadPage = ({
+  fileData,
+  setFileData,
+  quizData,
+  regenerateProcess,
+  loaderType,
+  handleRegenerate,
+}) => {
   const quizDisplay = (data) => {
     const queAns = data?.text?.split("\nA:");
     return (
       <div className="mt-3">
         <span className="fw-bold text-dark">Question:&nbsp;</span>
         {queAns[0]} <br />
-        <span className="fw-bold text-dark">Answer:</span> {queAns[1] || queAns[2] || ""}
+        <span className="fw-bold text-dark">Answer:</span>{" "}
+        {queAns[1] || queAns[2] || ""}
       </div>
     );
   };
@@ -38,18 +48,28 @@ const UploadPage = ({ fileData, setFileData, quizData }) => {
                   <Writing />
                   <span>Summarization</span>
                 </span>
-                <button className="regenarate-btn">
+                <button
+                  className="regenarate-btn"
+                  disabled={regenerateProcess}
+                  onClick={() => handleRegenerate("summary")}
+                >
                   <img src={Regenerate} height={30} width={30} alt="" />
                 </button>
               </div>
               <div className="summarization-data ">
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html:
-                      fileData?.summary?.replaceAll(".", ".<br />") ||
-                      "No description",
-                  }}
-                ></p>
+                {regenerateProcess && loaderType === "summary" ? (
+                  <div className="d-flex align-items-center justify-content-center">
+                    <FontAwesomeIcon icon={faSpinner} spin size="2x" />
+                  </div>
+                ) : (
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html:
+                        fileData?.summary?.replaceAll(".", ".<br />") ||
+                        "No description",
+                    }}
+                  ></p>
+                )}
               </div>
             </div>
             <div className="quiz-box">
@@ -58,12 +78,22 @@ const UploadPage = ({ fileData, setFileData, quizData }) => {
                   <Quiz />
                   <span>Quiz</span>
                 </span>
-                <button className="regenarate-btn">
+                <button
+                  className="regenarate-btn"
+                  disabled={regenerateProcess}
+                  onClick={() => handleRegenerate("quiz")}
+                >
                   <img src={Regenerate} height={30} width={30} alt="" />
                 </button>
               </div>
               <div className="quiz-data">
-                {quizData?.map((data) => quizDisplay(data))}
+                {regenerateProcess && loaderType === "quiz" ? (
+                  <div className="d-flex align-items-center justify-content-center">
+                    <FontAwesomeIcon icon={faSpinner} spin size="2x" />
+                  </div>
+                ) : (
+                  quizData?.map((data) => quizDisplay(data))
+                )}
               </div>
             </div>
           </div>
