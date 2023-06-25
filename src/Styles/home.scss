@@ -176,11 +176,11 @@
   border-bottom: none !important;
   &:focus {
     outline: none;
-    border-bottom: 1px solid gray !important;
+    border-bottom: none !important;
   }
   &:focus-visible {
     outline: none;
-    border-bottom: 1px solid gray !important;
+    border-bottom: none !important;
   }
 }
 

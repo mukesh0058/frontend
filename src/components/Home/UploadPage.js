@@ -62,13 +62,14 @@ const UploadPage = ({ fileData, setFileData }) => {
               </span>
             </div>
             <div className="transcription-data">
-              <p
-                dangerouslySetInnerHTML={{
-                  __html:
-                    fileData?.text?.replaceAll(".", ".<br />") ||
-                    "No description",
-                }}
-              ></p>
+              {fileData?.utterances?.map((data) => (
+                <p className="text-justify">
+                  <span className="fw-bold text-dark">
+                    Speaker {data?.speaker}:&nbsp;
+                  </span>
+                  <span>{data?.text}</span>
+                </p>
+              ))}
             </div>
           </div>
         </div>

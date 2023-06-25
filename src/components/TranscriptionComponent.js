@@ -11,25 +11,32 @@ import MasKYouTube from "../img/youtube-Icon.png";
 import { videoToAudio, videoToAudioYoutube } from "./Api/action";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGreaterThan } from "@fortawesome/free-solid-svg-icons";
+import Loader from "../SVG/Loader";
 
 const TranscriptionComponent = ({
   handleTranscriptionResponse,
   handleQuizResponse,
 }) => {
   const [isProcessing, setIsProcessing] = useState(false);
+  const [loaderType, setLoaderType] = useState("");
   const [youtubeLink, setYoutubeLink] = useState("");
   const uploadAudioFileRef = useRef();
   const uploadVideoFileRef = useRef();
 
   const audioUploadController = () => {
-    uploadAudioFileRef.current.click();
+    if (!isProcessing) {
+      uploadAudioFileRef.current.click();
+    }
   };
   const videoUploadController = () => {
-    uploadVideoFileRef.current.click();
+    if (!isProcessing) {
+      uploadVideoFileRef.current.click();
+    }
   };
 
   const handleVideoUpload = async (e) => {
     setIsProcessing(true);
+    setLoaderType("video");
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("file", file);
@@ -38,8 +45,9 @@ const TranscriptionComponent = ({
   };
 
   const handleYoutubeLink = async () => {
-    if (youtubeLink) {
+    if (youtubeLink && !isProcessing) {
       setIsProcessing(true);
+      setLoaderType("youtube");
       await videoToAudioYoutube(youtubeLink)
         .then(async (response) => {
           await doUploadVideo(response.data);
@@ -51,6 +59,7 @@ const TranscriptionComponent = ({
 
   const handleAudioUpload = async (e) => {
     setIsProcessing(true);
+    setLoaderType("audio");
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("file", file);
@@ -133,14 +142,24 @@ const TranscriptionComponent = ({
           onClick={audioUploadController}
         >
           <>
-            <div className="me-5">
-              <img src={Mask} className="upload-icon" />
+            <div className="me-4">
+              {isProcessing && loaderType === "audio" ? (
+                <Loader />
+              ) : (
+                <img src={Mask} className="upload-icon" alt="" />
+              )}
             </div>
             <div className="d-flex flex-column">
-              <p className="upload-heading">Upload Audio File</p>
-              <span className="upload-text">
-                Drop your audio file here, or click to browse
-              </span>
+              {isProcessing && loaderType === "audio" ? (
+                <p className="upload-heading">Processing Please Wait....</p>
+              ) : (
+                <>
+                  <p className="upload-heading">Upload Audio File</p>
+                  <span className="upload-text">
+                    Drop your audio file here, or click to browse
+                  </span>
+                </>
+              )}
             </div>
           </>
         </div>
@@ -150,38 +169,59 @@ const TranscriptionComponent = ({
         >
           <>
             <div className="me-4">
-              <img src={videoUpload} alt="" className="upload-icon" />
+              {isProcessing && loaderType === "video" ? (
+                <Loader />
+              ) : (
+                <img src={videoUpload} alt="" className="upload-icon" />
+              )}
             </div>
             <div className="d-flex flex-column">
-              <p className="upload-heading">Upload Video File</p>
-              <span className="upload-text">
-                Drop your video file here, or click to browse
-              </span>
+              {isProcessing && loaderType === "video" ? (
+                <p className="upload-heading">Processing Please Wait....</p>
+              ) : (
+                <>
+                  <p className="upload-heading">Upload Video File</p>
+                  <span className="upload-text">
+                    Drop your video file here, or click to browse
+                  </span>
+                </>
+              )}
             </div>
           </>
         </div>
         <div className="d-flex align-items-center border upload-container w-600  w-25">
           <>
             <div className="me-4">
-              <img src={MasKYouTube} alt="" className="upload-icon" />
+              {isProcessing && loaderType === "youtube" ? (
+                <Loader />
+              ) : (
+                <img src={MasKYouTube} alt="" className="upload-icon" />
+              )}
             </div>
             <div className="d-flex flex-column w-100 input-link">
-              <p className="upload-heading">YouTube Video Link</p>
-              <div className="">
-                <input
-                  type="text"
-                  className="youtube-link-box"
-                  value={youtubeLink}
-                  onChange={(e) => setYoutubeLink(e.target.value)}
-                  placeholder="https://www.youtube.com/watch?v=jd..."
-                />
-                <button
-                  className="btn btn-outline-dark"
-                  onClick={handleYoutubeLink}
-                >
-                  <FontAwesomeIcon icon={faGreaterThan} />
-                </button>
-              </div>
+              {isProcessing && loaderType === "youtube" ? (
+                <p className="upload-heading">Processing Please Wait....</p>
+              ) : (
+                <>
+                  <p className="upload-heading">YouTube Video Link</p>
+                  <div className="">
+                    <input
+                      type="text"
+                      className="youtube-link-box"
+                      value={youtubeLink}
+                      disabled={isProcessing}
+                      onChange={(e) => setYoutubeLink(e.target.value)}
+                      placeholder="https://www.youtube.com/watch?v=jd..."
+                    />
+                    <button
+                      className="btn btn-outline-dark"
+                      onClick={handleYoutubeLink}
+                    >
+                      <FontAwesomeIcon icon={faGreaterThan} />
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           </>
         </div>

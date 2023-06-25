@@ -1,5 +1,5 @@
 import axios from "axios";
-const OPEN_AI_TOKEN = "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";
+const OPEN_AI_TOKEN = "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";
 
 export const generateQuizFromOpenAi = async (text) => {
   return await axios.post(
