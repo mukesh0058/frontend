@@ -1,0 +1,43 @@
+/* AboutUs.css */
+.about-us {
+  max-width: 70%;
+  margin: 0 auto;
+  padding: 20px;
+}
+.about-us header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.about-us header h1 {
+  font-size: 28px;
+  color: #333;
+}
+.about-us main {
+  margin-bottom: 40px;
+}
+.about-us section {
+  margin-bottom: 30px;
+}
+.about-us section h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+.about-us section p {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.5;
+}
+.about-us section ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+.about-us section ul li {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 5px;
+}
+.about-us footer {
+  text-align: center;
+  color: #999;
+}

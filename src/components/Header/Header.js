@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import "./Header.scss";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [scroll, setActive] = useState(false);
@@ -42,14 +43,23 @@ const Header = () => {
             <span className="navbar-text">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#">
-                    About
-                  </a>
+                  <Link className="nav-link" to="/">
+                    Home
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link
+                    className="nav-link active"
+                    aria-current="page"
+                    to="/about"
+                  >
+                    About
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/contact">
                     Contact
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <span className="nav-link">
