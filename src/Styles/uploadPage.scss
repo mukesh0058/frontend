@@ -57,7 +57,38 @@
 .transcription-data:hover {
   overflow-y: scroll;
 }
-
+.topic-data {
+  display: flex;
+  flex-wrap: wrap;
+  .odd {
+    padding: 7px 8px 7px 8px;
+    border-radius: 20px;
+    gap: 10px;
+    color: #69069e;
+    font-family: Montserrat !important;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: left;
+    background: #69069e36;
+    margin: 5px 5px;
+  }
+  .even {
+    padding: 7px 8px 7px 8px;
+    border-radius: 20px;
+    gap: 10px;
+    color: #e403b6;
+    font-family: Montserrat !important;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: left;
+    background: #e403b636;
+    margin: 5px 5px;
+  }
+}
 .title-summarization {
   position: sticky;
   background: #ffff;

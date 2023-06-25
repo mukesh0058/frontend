@@ -18,6 +18,11 @@ export const generateTranscript = async (url) => {
       speaker_labels: true,
       summary_model: "informative",
       summary_type: "bullets",
+      iab_categories: true,
+      custom_spelling: [],
+      format_text: true,
+      language_detection: false,
+      punctuate: true,
     },
     {
       headers: {

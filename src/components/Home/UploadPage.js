@@ -30,6 +30,13 @@ const UploadPage = ({
     );
   };
 
+  const data = fileData?.iab_categories_result.summary;
+  const words = Object.keys(data).flatMap((key) => {
+    // Remove any whitespace and split the key by '>'
+    const wordParts = key.trim().split(">");
+    return wordParts.map((part) => part.trim());
+  });
+  const uniqueWords = [...new Set(words)];
   return (
     <div>
       <NewHeader />
@@ -62,13 +69,22 @@ const UploadPage = ({
                     <FontAwesomeIcon icon={faSpinner} spin size="2x" />
                   </div>
                 ) : (
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html:
-                        fileData?.summary?.replaceAll(".", ".<br />") ||
-                        "No description",
-                    }}
-                  ></p>
+                  <>
+                    <div className="topic-data">
+                      {uniqueWords?.slice(0, 5)?.map((key, i) => (
+                        <span className={i % 2 == 0 ? "even" : "odd"}>
+                          {key}
+                        </span>
+                      ))}
+                    </div>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          fileData?.summary?.replaceAll(".", ".<br />") ||
+                          "No description",
+                      }}
+                    ></p>
+                  </>
                 )}
               </div>
             </div>
